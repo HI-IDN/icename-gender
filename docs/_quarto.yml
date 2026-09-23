@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "kyngreinir"
+  description: "Estimate gender from Icelandic names: patronymics and Þjóðskrá's name register."
+  site-url: https://hi-idn.github.io/kyngreinir/
+  repo-url: https://github.com/HI-IDN/kyngreinir
+  repo-actions: [edit, issue]
+  favicon: img/hi/favicon.svg
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    logo: img/hi/hi_named_logo-en.svg
+    logo-alt: "University of Iceland"
+    background: primary
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Get started
+        href: install.qmd
+      - text: Guide
+        href: rules.qmd
+      - text: Reference
+        href: cli.qmd
+    right:
+      - icon: github
+        href: https://github.com/HI-IDN/kyngreinir
+        aria-label: Source on GitHub
+  sidebar:
+    style: floating
+    collapse-level: 1
+    contents:
+      - index.qmd
+      - section: "Getting started"
+        contents:
+          - install.qmd
+          - quickstart.qmd
+      - section: "Guide"
+        contents:
+          - rules.qmd
+          - certainty.qmd
+          - register.qmd
+      - section: "Reference"
+        contents:
+          - cli.qmd
+          - python.qmd
+  page-footer:
+    left: "© 2026 Háskóli Íslands · MIT licence"
+    right:
+      - icon: github
+        href: https://github.com/HI-IDN/kyngreinir
+
+format:
+  html:
+    theme:
+      - cosmo
+      - hi.scss
+    include-in-header: partials/header-includes.inc
+    toc: true
+    code-copy: true
+    code-overflow: wrap

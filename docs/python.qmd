@@ -1,0 +1,84 @@
+---
+title: "Python API"
+---
+
+```python
+from kyngreinir import classify, explain, Register
+```
+
+## `classify(name, register=None)`
+
+Estimates the gender of one full name.
+
+```python
+classify("Helga Ingimundardóttir")
+# Estimate(gender='female', rule='dottir', given_name=None)
+```
+
+Returns an `Estimate`:
+
+| Field | Type | Holds |
+| --- | --- | --- |
+| `gender` | `str | None` | `"female"`, `"male"`, or `None` for unknown |
+| `rule` | `str | None` | `"dottir"`, `"given_name"`, `"son"`, or `None` |
+| `given_name` | `str | None` | the given name that decided, for rule `"given_name"` |
+
+`register` defaults to the bundled snapshot, loaded once and reused.
+
+## `explain(name, register=None)`
+
+The estimate with the evidence behind it. See [How certain is it?](certainty.qmd).
+
+```python
+ex = explain("Helga Ingimundarson")
+ex.estimate    # Estimate(gender='female', rule='given_name', given_name='Helga')
+ex.agreement   # 'conflicting'
+ex.evidence
+# [Evidence(part='Helga', source='register', says='female'),
+#  Evidence(part='Ingimundarson', source='suffix', says='male')]
+```
+
+Returns an `Explanation`:
+
+| Field | Type | Holds |
+| --- | --- | --- |
+| `estimate` | `Estimate` | what `classify()` returns |
+| `evidence` | `list[Evidence]` | one per given name, plus the suffix if it says anything |
+| `female`, `male` | `int` | parts that say female, male |
+| `unisex` | `int` | given names registered for both |
+| `unknown` | `int` | given names not in the register, or only as middle names |
+| `agreement` | `str` | `"unanimous"`, `"conflicting"` or `"none"` |
+
+Each `Evidence` has `part` (as written), `source` (`"register"` or `"suffix"`) and `says`
+(`"female"`, `"male"`, `"unisex"` or `"unknown"`).
+
+## `Register(entries=None, *, approved_only=False)`
+
+The name register.
+
+```python
+from kyngreinir.registry import read_csv
+
+reg = Register()                                   # the bundled snapshot
+reg = Register(read_csv("my-register.csv"))        # another copy
+reg = Register(approved_only=True)                 # without rejected names
+
+reg.gender_of("Helga")   # 'female'
+classify("Helga Ingimundarson", reg)
+```
+
+`gender_of()` returns `"female"`, `"male"`, `"unisex"` or `"unknown"`.
+
+## Many names
+
+Build the register once and pass it, or rely on the default, which is also built once:
+
+```python
+import pandas as pd
+from kyngreinir import classify
+
+df = pd.read_csv("people.csv")
+est = df["name"].map(classify)
+df["gender"] = est.map(lambda e: e.gender)
+df["gender_rule"] = est.map(lambda e: e.rule)
+```

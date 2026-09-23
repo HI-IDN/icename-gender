@@ -1,0 +1,57 @@
+---
+title: "How certain is it?"
+---
+
+The [rules](rules.qmd) give one answer. `explain()`, and `--detail` on the command line, show
+what that answer rests on: what each given name says in the register, what the last name's
+suffix says, and whether they agree.
+
+```bash
+kyngreinir name "Helga Ingimundarson" --detail
+```
+
+```
+female	given_name (Helga)
+  Helga           register  female
+  Ingimundarson   suffix    male
+  agreement: conflicting (female 1, male 1, unisex 0, unknown 0)
+```
+
+## Evidence
+
+One line per part of the name:
+
+| Source | Part | Says |
+| --- | --- | --- |
+| `register` | each given name | `female`, `male`, `unisex`, or `unknown` |
+| `suffix` | the last name, if it ends in *-dóttir* or *-son* | `female` or `male` |
+
+A given name is `unknown` when the register does not list it, or lists it only as a middle
+name. A hyphenated name not registered whole says what its registered parts say, or `unisex`
+if they disagree.
+
+## Agreement
+
+| Agreement | Meaning |
+| --- | --- |
+| `unanimous` | every part that says anything says the same |
+| `conflicting` | some parts say female and some male; the estimate follows the rules |
+| `none` | no part says female or male; the estimate is unknown |
+
+`conflicting` is not an error. *Helga Ingimundarson* is a woman with a *-son* family name,
+and the estimate is right. But a study that wants only the clearest cases can keep
+`unanimous` rows and report how many it set aside.
+
+## In a CSV
+
+```bash
+kyngreinir csv people.csv --detail -o people_gender.csv
+```
+
+adds three columns to `gender` and `gender_rule`:
+
+| Column | Holds |
+| --- | --- |
+| `gender_agreement` | `unanimous`, `conflicting` or `none` |
+| `gender_female` | how many parts say female |
+| `gender_male` | how many parts say male |

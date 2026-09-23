@@ -12,14 +12,14 @@ Estimate gender from Icelandic names — from the naming convention and
 > aggregate statistics, report the unknowns, and never present it as a fact about a person.
 
 ```bash
-kyngreinir name "Anna Thorsteinsson"      # female  given_name (Anna)
+kyngreinir name "Helga Ingimundardóttir"  # female  dottir
 kyngreinir csv people.csv --column name -o people_gender.csv
 ```
 
 ```python
 from kyngreinir import classify
 
-classify("Guðrún Jónsdóttir")   # Estimate(gender='female', rule='dottir', given_name=None)
+classify("Helga Ingimundardóttir")   # Estimate(gender='female', rule='dottir', given_name=None)
 ```
 
 ## The rules
@@ -32,7 +32,7 @@ In order; the first that decides wins, and the rule is returned with the gender.
    last. Unisex names and middle names (*millinöfn*) are passed over; hyphenated names are also
    looked up part by part.
 3. **`son`** — the last name ends in *-son*. Checked only after the given names, because *-son*
-   is also a family name: "Anna Thorsteinsson" is a woman, and her given name says so first.
+   is also a family name: "Helga Ingimundarson" is a woman, and her given name says so first.
 
 Anything else is unknown.
 
@@ -43,10 +43,10 @@ name says in the register, what the last name's suffix says, how many parts say 
 male, and whether they agree.
 
 ```bash
-kyngreinir name "Anna Thorsteinsson" --detail
-# female  given_name (Anna)
-#   Anna           register  female
-#   Thorsteinsson  suffix    male
+kyngreinir name "Helga Ingimundarson" --detail
+# female  given_name (Helga)
+#   Helga          register  female
+#   Ingimundarson  suffix    male
 #   agreement: conflicting (female 1, male 1, unisex 0, unknown 0)
 ```
 
@@ -54,6 +54,8 @@ kyngreinir name "Anna Thorsteinsson" --detail
 when parts disagree (the estimate then follows the rules above), and `none` when no part says
 either. `kyngreinir csv --detail` adds `gender_agreement`, `gender_female` and `gender_male`
 columns.
+
+Full documentation: <https://hi-idn.github.io/kyngreinir/>
 
 ## What it deliberately does not do
 

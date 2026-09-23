@@ -1,0 +1,37 @@
+---
+title: "Install"
+---
+
+Python 3.10 or newer.
+
+```bash
+pip install git+https://github.com/HI-IDN/kyngreinir.git
+```
+
+That gives you the `kyngreinir` command and the `kyngreinir` Python package:
+
+```bash
+kyngreinir --help
+```
+
+A snapshot of the register ships with the package, so there is nothing to download before
+the first classification, and no network access afterwards.
+
+## From source
+
+```bash
+git clone git@github.com:HI-IDN/kyngreinir.git
+cd kyngreinir
+pip install -e ".[dev]"
+pytest
+```
+
+## As a dependency
+
+In a `pyproject.toml`:
+
+```toml
+dependencies = [
+    "kyngreinir @ git+https://github.com/HI-IDN/kyngreinir.git",
+]
+```

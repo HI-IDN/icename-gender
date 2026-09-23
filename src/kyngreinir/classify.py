@@ -8,7 +8,7 @@ The rules, in order -- the first that decides wins:
    girl's name. Given names are every name but the last; a single name is its own given name.
    Hyphenated given names are also looked up part by part ("Anna-Lísa").
 3. ``son``: the last name ends in -son. Checked only after the given names, because -son is
-   also a family name: "Anna Thorsteinsson" is a woman, and the register says so first.
+   also a family name: "Helga Ingimundarson" is a woman, and the register says so first.
 
 Anything else is unknown (gender None). The rule that decided is returned with the gender, so
 estimates can be reported by how they were made.

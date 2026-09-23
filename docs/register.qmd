@@ -1,0 +1,65 @@
+---
+title: "The register"
+---
+
+[Mannanafnaskrá](https://island.is/leit-i-mannanafnaskra) is the register of Icelandic
+given and middle names, kept by Þjóðskrá (Registers Iceland). Every name the Icelandic
+Naming Committee has ruled on is in it, with who it is for.
+
+## What is bundled
+
+A snapshot of the whole register ships in `src/kyngreinir/data/mannanafnaskra.csv`, about
+5,900 names:
+
+```{.csv filename="mannanafnaskra.csv"}
+id,icelandicName,type,status,verdict,url
+2461,helga,ST,Sam,,
+789,ingimundur,DR,Sam,,
+```
+
+| Column | Meaning |
+| --- | --- |
+| `icelandicName` | the name, in lowercase |
+| `type` | `DR`/`RDR` a boy's name (*drengjanafn*), `ST`/`RST` a girl's name (*stúlknanafn*); anything else, such as `MI` (*millinafn*), is not gendered |
+| `status` | `Sam` approved, `Haf` rejected |
+| `verdict` | the date of the committee's ruling, if any |
+| `url` | a link to the ruling, if any |
+
+A name registered both as a boy's and as a girl's name is unisex.
+
+Rejected names are kept by default: a rejected name is still evidence of the gender it was
+proposed for. Pass
+`approved_only=True` to `Register` to use approved names only.
+
+## Refreshing it
+
+```bash
+kyngreinir registry-fetch -o src/kyngreinir/data/mannanafnaskra.csv
+```
+
+About 30 requests to island.is, under a minute: one substring search per letter of the
+Icelandic alphabet, deduplicated by id.
+
+To use a fresh copy without replacing the bundled one, pass it with `--register`:
+
+```bash
+kyngreinir registry-fetch -o my-register.csv
+kyngreinir name "Helga Ingimundardóttir" --register my-register.csv
+```
+
+## How it is read
+
+There is no documented public API or bulk download for the register. Its search page calls
+an unauthenticated GraphQL endpoint, and `kyngreinir.registry.search()` calls the same
+endpoint directly, with the headers the site's own search box sends.
+
+::: {.callout-note}
+## If `registry-fetch` stops working
+
+The search uses a persisted-query hash that the island.is page sends. If island.is changes
+the query, every search fails with `PersistedQueryNotFound`. Open the register's search
+page, search for anything, find the `GetIcelandicNameBySearch` request in the browser's
+network tab, and copy its `sha256Hash` into `PERSISTED_SHA256` in `registry.py`.
+
+Classifying is not affected: it only reads the bundled snapshot.
+:::

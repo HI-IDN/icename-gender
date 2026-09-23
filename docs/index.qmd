@@ -1,0 +1,54 @@
+---
+title: "kyngreinir"
+---
+
+Estimate gender from Icelandic names — from the naming convention and
+[Þjóðskrá's name register](https://island.is/leit-i-mannanafnaskra) (Mannanafnaskrá).
+
+```bash
+kyngreinir name "Helga Ingimundardóttir"      # female  dottir
+kyngreinir csv people.csv --column name -o people_gender.csv
+```
+
+```python
+from kyngreinir import classify
+
+classify("Helga Ingimundardóttir")   # Estimate(gender='female', rule='dottir', given_name=None)
+```
+
+Every estimate comes with the rule that decided it, so results can be reported by how they
+were made, and the names no rule decides stay unknown.
+
+::: {.callout-important}
+## An estimate from a name, not a fact about a person
+
+This is a simple classifier based on which names the register lists as boys' or girls'
+names, and on the *-dóttir*/*-son* convention. It does not infer anyone's sex or gender: it
+estimates what a name suggests under naming convention only. Use it for aggregate
+statistics, report the unknowns, and never present it as a fact about a person.
+:::
+
+## Why Icelandic names are different
+
+Most Icelanders carry no family name. The last name is a patronymic or matronymic — the
+father's or mother's given name plus *-dóttir* (daughter) or *-son* (son) — so it says the
+bearer's gender outright. And every given name must be approved by the Icelandic Naming
+Committee and entered in the register as a boy's name, a girl's name, or a middle name.
+
+Between the two, most Icelandic names can be read without guessing. A general-purpose
+name-to-gender tool, trained on first names from other countries, cannot use either.
+
+## What it deliberately does not do
+
+- **No guessing past the evidence.** A name no rule decides is unknown, not a coin toss, and
+  a name registered for both boys and girls is not assigned to either.
+- **No claims about people.** This estimates gender from a naming convention. Report it in
+  aggregate, with the unknowns, never as a fact about an individual.
+- **No personal data.** The register is about names, not people. Classifying runs offline
+  against a snapshot bundled with the package; nothing is sent anywhere.
+
+## Where to start
+
+- [Install](install.qmd) — get it running.
+- [Quickstart](quickstart.qmd) — classify one name, then a whole CSV.
+- [The rules](rules.qmd) — how an estimate is made, and in what order.

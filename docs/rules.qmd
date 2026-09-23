@@ -1,0 +1,66 @@
+---
+title: "The rules"
+---
+
+Three rules, in order. The first that decides wins, and its name is returned with the
+gender.
+
+| Rule | Decides when | Gender |
+| --- | --- | --- |
+| `dottir` | the last name ends in *-dóttir* | female |
+| `given_name` | a given name is registered only as a boy's or only as a girl's name | that name's |
+| `son` | the last name ends in *-son* | male |
+
+Anything else is unknown: `gender` is `None` in Python, empty in a CSV.
+
+## 1. `dottir`
+
+The last name ends in *-dóttir*. A patronymic or matronymic ending in *-dóttir* is only ever
+a woman's, so nothing else is consulted.
+
+```
+Helga Ingimundardóttir   →  female  dottir
+```
+
+## 2. `given_name`
+
+The first given name the register lists only as a boy's name (*drengjanafn*) or only as a
+girl's name (*stúlknanafn*).
+
+- **Given names** are every name but the last. A single name is its own given name.
+- **Unisex names** — registered for both boys and girls — are passed over, as are names the
+  register lists only as middle names (*millinöfn*), and names it does not list at all.
+- **Hyphenated names** are looked up whole and then part by part: *Anna-Lísa* is found
+  through *Anna* even if the pair is not registered.
+
+```
+Ingimundur Helgason      →  male    given_name (Ingimundur)
+```
+
+## 3. `son`
+
+The last name ends in *-son*. This is checked only after the given names, because *-son* is
+also a family name: *Helga Ingimundarson* is a woman, and her given name says so first.
+
+```
+Helga Ingimundarson      →  female  given_name (Helga)
+```
+
+Without the order, a woman with a *-son* family name would be counted as a man. That was the
+bug in the surname-first rule this package replaced.
+
+## Normalizing the input
+
+Names are split on whitespace and commas, and stray dots are dropped, so
+`"Ingimundardóttir, Helga"` and `"Helga  Ingimundardóttir"` both split into two parts.
+
+::: {.callout-warning}
+## A "Last, First" name is not reordered
+
+The last part is always taken as the last name. `"Ingimundardóttir, Helga"` is read as given
+name *Ingimundardóttir* and last name *Helga*, and comes out unknown. Put names in natural
+order before classifying them.
+:::
+
+Register lookups are case-insensitive but accent-sensitive: *Guðmundur* is in the register,
+*Gudmundur* is not. Names transliterated to ASCII will often come out unknown.

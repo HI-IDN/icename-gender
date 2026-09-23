@@ -1,0 +1,55 @@
+---
+title: "Commands"
+---
+
+Three commands.
+
+## `name`
+
+Estimates the gender of one name and says which rule decided.
+
+```bash
+kyngreinir name "Helga Ingimundardóttir"
+```
+
+| Option | Meaning |
+| --- | --- |
+| `FULL_NAME` | The full name, quoted. |
+| `--detail` | Also show what each part of the name says, and the agreement. |
+| `--register` | A register CSV to use instead of the bundled snapshot. |
+
+Prints the gender (or `unknown`), a tab, and the rule (or `-`). For the `given_name` rule, the
+name that decided follows in brackets.
+
+## `csv`
+
+Adds `gender` and `gender_rule` columns to a CSV of names.
+
+```bash
+kyngreinir csv people.csv --column name -o people_gender.csv
+```
+
+| Option | Meaning |
+| --- | --- |
+| `INPUT_PATH` | A UTF-8 CSV with a header row. |
+| `--column`, `-c` | The column holding the full names. Default `name`. |
+| `--output`, `-o` | Where to write. Default: standard output. |
+| `--detail` | Also add `gender_agreement`, `gender_female` and `gender_male`. |
+| `--register` | A register CSV to use instead of the bundled snapshot. |
+
+All input columns are kept, in order. An empty cell or an undecided name gets empty
+`gender` and `gender_rule`. A count of the results is printed to standard error.
+
+## `registry-fetch`
+
+Fetches the whole register from island.is.
+
+```bash
+kyngreinir registry-fetch -o mannanafnaskra.csv
+```
+
+| Option | Meaning |
+| --- | --- |
+| `--output`, `-o` | Where to write the register. Default `mannanafnaskra.csv`. |
+
+About 30 requests, under a minute. See [The register](register.qmd).

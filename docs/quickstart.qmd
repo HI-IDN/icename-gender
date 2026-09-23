@@ -1,0 +1,74 @@
+---
+title: "Quickstart"
+---
+
+## 1. One name
+
+```bash
+kyngreinir name "Helga Ingimundardóttir"
+```
+
+```
+female	dottir
+```
+
+Two columns: the estimate, and the [rule](rules.qmd) that decided it. The last name ends in
+*-dóttir*, so that settles it.
+
+## 2. What the estimate rests on
+
+```bash
+kyngreinir name "Helga Ingimundardóttir" --detail
+```
+
+```
+female	dottir
+  Helga                   register  female
+  Ingimundardóttir        suffix    female
+  agreement: unanimous (female 2, male 0, unisex 0, unknown 0)
+```
+
+Each part of the name, and what it says on its own. Here both agree. See
+[How certain is it?](certainty.qmd) for when they do not.
+
+## 3. A whole file
+
+Given a CSV with a column of full names:
+
+```{.csv filename="people.csv"}
+name
+Helga Ingimundardóttir
+Ingimundur Helgason
+Helga Ingimundarson
+```
+
+```bash
+kyngreinir csv people.csv --column name -o people_gender.csv
+```
+
+```{.csv filename="people_gender.csv"}
+name,gender,gender_rule
+Helga Ingimundardóttir,female,dottir
+Ingimundur Helgason,male,given_name
+Helga Ingimundarson,female,given_name
+```
+
+Every input column is kept; `gender` and `gender_rule` are added. A name no rule decides
+gets both empty. A count of the results goes to standard error, so it does not end up in the
+output file.
+
+Add `--detail` for the agreement and the female/male evidence counts as well.
+
+## 4. From Python
+
+```python
+from kyngreinir import classify, explain
+
+classify("Helga Ingimundarson")
+# Estimate(gender='female', rule='given_name', given_name='Helga')
+
+explain("Helga Ingimundarson").agreement
+# 'conflicting'
+```
+
+See the [Python API](python.qmd) for the rest.

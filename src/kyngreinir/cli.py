@@ -23,7 +23,7 @@ def _register(path: Path | None) -> Register:
 
 @app.command()
 def name(
-    full_name: str = typer.Argument(..., help="A full name, e.g. 'Anna Thorsteinsson'."),
+    full_name: str = typer.Argument(..., help="A full name, e.g. 'Helga Ingimundardóttir'."),
     register: Path | None = typer.Option(None, "--register", help=REGISTER_HELP),
     detail: bool = typer.Option(
         False, "--detail", help="Also show what each part of the name says, and the agreement."
