@@ -3,7 +3,7 @@ title: "Python API"
 ---
 
 ```python
-from kyngreinir import classify, explain, Register
+from icename_gender import classify, explain, Register
 ```
 
 ## `classify(name, register=None)`
@@ -57,7 +57,7 @@ Each `Evidence` has `part` (as written), `source` (`"register"` or `"suffix"`) a
 The name register.
 
 ```python
-from kyngreinir.registry import read_csv
+from icename_gender.registry import read_csv
 
 reg = Register()                                   # the bundled snapshot
 reg = Register(read_csv("my-register.csv"))        # another copy
@@ -75,7 +75,7 @@ Build the register once and pass it, or rely on the default, which is also built
 
 ```python
 import pandas as pd
-from kyngreinir import classify
+from icename_gender import classify
 
 df = pd.read_csv("people.csv")
 est = df["name"].map(classify)

@@ -9,7 +9,7 @@ Three commands.
 Estimates the gender of one name and says which rule decided.
 
 ```bash
-kyngreinir name "Helga Ingimundardóttir"
+icename-gender name "Helga Ingimundardóttir"
 ```
 
 | Option | Meaning |
@@ -26,7 +26,7 @@ name that decided follows in brackets.
 Adds `gender` and `gender_rule` columns to a CSV of names.
 
 ```bash
-kyngreinir csv people.csv --column name -o people_gender.csv
+icename-gender csv people.csv --column name -o people_gender.csv
 ```
 
 | Option | Meaning |
@@ -45,7 +45,7 @@ All input columns are kept, in order. An empty cell or an undecided name gets em
 Fetches the whole register from island.is.
 
 ```bash
-kyngreinir registry-fetch -o mannanafnaskra.csv
+icename-gender registry-fetch -o mannanafnaskra.csv
 ```
 
 | Option | Meaning |

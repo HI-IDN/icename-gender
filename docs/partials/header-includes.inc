@@ -6,7 +6,7 @@
 <script>
   // fixed browser-tab title on every page (navbar keeps the full title)
   (function () {
-    var fixTitle = function () { document.title = "kyngreinir"; };
+    var fixTitle = function () { document.title = "icename-gender"; };
     fixTitle();
     document.addEventListener("DOMContentLoaded", fixTitle);
   })();

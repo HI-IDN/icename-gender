@@ -7,7 +7,7 @@ called here directly with plain HTTP and the few headers CloudFront and Apollo's
 require.
 
 A snapshot of the whole register ships with the package (data/mannanafnaskra.csv), so
-classifying needs no network. `fetch_all()` and `kyngreinir registry-fetch` refresh it.
+classifying needs no network. `fetch_all()` and `icename-gender registry-fetch` refresh it.
 
 Entry shape: {"id": int, "icelandicName": str (lowercase), "type": str, "status": "Sam"|"Haf",
 "verdict": "dd.mm.yyyy"|None, "url": str|None}.
@@ -112,7 +112,7 @@ def write_csv(entries: Iterable[dict], path: Path) -> None:
 def read_csv(path: Path | None = None) -> list[dict]:
     """A register CSV; the snapshot bundled with the package when no path is given."""
     if path is None:
-        text = resources.files("kyngreinir").joinpath("data/mannanafnaskra.csv")
+        text = resources.files("icename_gender").joinpath("data/mannanafnaskra.csv")
         with text.open(encoding="utf-8") as f:
             return list(csv.DictReader(f))
     with Path(path).open(encoding="utf-8") as f:

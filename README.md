@@ -1,6 +1,6 @@
-# kyngreinir
+# icename-gender
 
-[![CI](https://github.com/HI-IDN/kyngreinir/actions/workflows/ci.yml/badge.svg)](https://github.com/HI-IDN/kyngreinir/actions/workflows/ci.yml)
+[![CI](https://github.com/HI-IDN/icename-gender/actions/workflows/ci.yml/badge.svg)](https://github.com/HI-IDN/icename-gender/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
 
 Estimate gender from Icelandic names — from the naming convention and
@@ -12,12 +12,12 @@ Estimate gender from Icelandic names — from the naming convention and
 > aggregate statistics, report the unknowns, and never present it as a fact about a person.
 
 ```bash
-kyngreinir name "Helga Ingimundardóttir"  # female  dottir
-kyngreinir csv people.csv --column name -o people_gender.csv
+icename-gender name "Helga Ingimundardóttir"  # female  dottir
+icename-gender csv people.csv --column name -o people_gender.csv
 ```
 
 ```python
-from kyngreinir import classify
+from icename_gender import classify
 
 classify("Helga Ingimundardóttir")   # Estimate(gender='female', rule='dottir', given_name=None)
 ```
@@ -43,7 +43,7 @@ name says in the register, what the last name's suffix says, how many parts say 
 male, and whether they agree.
 
 ```bash
-kyngreinir name "Helga Ingimundarson" --detail
+icename-gender name "Helga Ingimundarson" --detail
 # female  given_name (Helga)
 #   Helga          register  female
 #   Ingimundarson  suffix    male
@@ -52,10 +52,10 @@ kyngreinir name "Helga Ingimundarson" --detail
 
 `agreement` is `unanimous` when every part that says anything says the same, `conflicting`
 when parts disagree (the estimate then follows the rules above), and `none` when no part says
-either. `kyngreinir csv --detail` adds `gender_agreement`, `gender_female` and `gender_male`
+either. `icename-gender csv --detail` adds `gender_agreement`, `gender_female` and `gender_male`
 columns.
 
-Full documentation: <https://hi-idn.github.io/kyngreinir/>
+Full documentation: <https://hi-idn.github.io/icename-gender/>
 
 ## What it deliberately does not do
 
@@ -69,31 +69,31 @@ Full documentation: <https://hi-idn.github.io/kyngreinir/>
 ## Install
 
 ```bash
-pip install git+https://github.com/HI-IDN/kyngreinir.git
+pip install git+https://github.com/HI-IDN/icename-gender.git
 ```
 
 For development:
 
 ```bash
-git clone git@github.com:HI-IDN/kyngreinir.git
-cd kyngreinir
+git clone git@github.com:HI-IDN/icename-gender.git
+cd icename-gender
 pip install -e ".[dev]"
 pytest
 ```
 
 ## The register
 
-A snapshot of the whole register ships in `src/kyngreinir/data/mannanafnaskra.csv`. To refresh
+A snapshot of the whole register ships in `src/icename_gender/data/mannanafnaskra.csv`. To refresh
 it (about 30 requests to island.is, under a minute):
 
 ```bash
-kyngreinir registry-fetch -o src/kyngreinir/data/mannanafnaskra.csv
+icename-gender registry-fetch -o src/icename_gender/data/mannanafnaskra.csv
 ```
 
-or use a fresh copy without replacing the bundled one: `kyngreinir name ... --register my.csv`.
+or use a fresh copy without replacing the bundled one: `icename-gender name ... --register my.csv`.
 
 There is no documented public API for the register. Its search page calls an unauthenticated
-GraphQL endpoint, which `kyngreinir.registry.search()` calls directly; see that module for the
+GraphQL endpoint, which `icename_gender.registry.search()` calls directly; see that module for the
 details and what to do if island.is changes the query.
 
 ## License

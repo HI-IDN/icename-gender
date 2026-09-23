@@ -8,7 +8,7 @@ Naming Committee has ruled on is in it, with who it is for.
 
 ## What is bundled
 
-A snapshot of the whole register ships in `src/kyngreinir/data/mannanafnaskra.csv`, about
+A snapshot of the whole register ships in `src/icename_gender/data/mannanafnaskra.csv`, about
 5,900 names:
 
 ```{.csv filename="mannanafnaskra.csv"}
@@ -34,7 +34,7 @@ proposed for. Pass
 ## Refreshing it
 
 ```bash
-kyngreinir registry-fetch -o src/kyngreinir/data/mannanafnaskra.csv
+icename-gender registry-fetch -o src/icename_gender/data/mannanafnaskra.csv
 ```
 
 About 30 requests to island.is, under a minute: one substring search per letter of the
@@ -43,14 +43,14 @@ Icelandic alphabet, deduplicated by id.
 To use a fresh copy without replacing the bundled one, pass it with `--register`:
 
 ```bash
-kyngreinir registry-fetch -o my-register.csv
-kyngreinir name "Helga Ingimundardóttir" --register my-register.csv
+icename-gender registry-fetch -o my-register.csv
+icename-gender name "Helga Ingimundardóttir" --register my-register.csv
 ```
 
 ## How it is read
 
 There is no documented public API or bulk download for the register. Its search page calls
-an unauthenticated GraphQL endpoint, and `kyngreinir.registry.search()` calls the same
+an unauthenticated GraphQL endpoint, and `icename_gender.registry.search()` calls the same
 endpoint directly, with the headers the site's own search box sends.
 
 ::: {.callout-note}

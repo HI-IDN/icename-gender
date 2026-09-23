@@ -1,17 +1,17 @@
 ---
-title: "kyngreinir"
+title: "icename-gender"
 ---
 
 Estimate gender from Icelandic names — from the naming convention and
 [Þjóðskrá's name register](https://island.is/leit-i-mannanafnaskra) (Mannanafnaskrá).
 
 ```bash
-kyngreinir name "Helga Ingimundardóttir"      # female  dottir
-kyngreinir csv people.csv --column name -o people_gender.csv
+icename-gender name "Helga Ingimundardóttir"      # female  dottir
+icename-gender csv people.csv --column name -o people_gender.csv
 ```
 
 ```python
-from kyngreinir import classify
+from icename_gender import classify
 
 classify("Helga Ingimundardóttir")   # Estimate(gender='female', rule='dottir', given_name=None)
 ```

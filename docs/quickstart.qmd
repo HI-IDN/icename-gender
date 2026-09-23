@@ -5,7 +5,7 @@ title: "Quickstart"
 ## 1. One name
 
 ```bash
-kyngreinir name "Helga Ingimundardóttir"
+icename-gender name "Helga Ingimundardóttir"
 ```
 
 ```
@@ -18,7 +18,7 @@ Two columns: the estimate, and the [rule](rules.qmd) that decided it. The last n
 ## 2. What the estimate rests on
 
 ```bash
-kyngreinir name "Helga Ingimundardóttir" --detail
+icename-gender name "Helga Ingimundardóttir" --detail
 ```
 
 ```
@@ -43,7 +43,7 @@ Helga Ingimundarson
 ```
 
 ```bash
-kyngreinir csv people.csv --column name -o people_gender.csv
+icename-gender csv people.csv --column name -o people_gender.csv
 ```
 
 ```{.csv filename="people_gender.csv"}
@@ -62,7 +62,7 @@ Add `--detail` for the agreement and the female/male evidence counts as well.
 ## 4. From Python
 
 ```python
-from kyngreinir import classify, explain
+from icename_gender import classify, explain
 
 classify("Helga Ingimundarson")
 # Estimate(gender='female', rule='given_name', given_name='Helga')

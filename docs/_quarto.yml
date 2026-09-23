@@ -3,10 +3,10 @@ project:
   output-dir: _site
 
 website:
-  title: "kyngreinir"
+  title: "icename-gender"
   description: "Estimate gender from Icelandic names: patronymics and Þjóðskrá's name register."
-  site-url: https://hi-idn.github.io/kyngreinir/
-  repo-url: https://github.com/HI-IDN/kyngreinir
+  site-url: https://hi-idn.github.io/icename-gender/
+  repo-url: https://github.com/HI-IDN/icename-gender
   repo-actions: [edit, issue]
   favicon: img/hi/favicon.svg
   search:
@@ -27,7 +27,7 @@ website:
         href: cli.qmd
     right:
       - icon: github
-        href: https://github.com/HI-IDN/kyngreinir
+        href: https://github.com/HI-IDN/icename-gender
         aria-label: Source on GitHub
   sidebar:
     style: floating
@@ -51,7 +51,7 @@ website:
     left: "© 2026 Háskóli Íslands · MIT licence"
     right:
       - icon: github
-        href: https://github.com/HI-IDN/kyngreinir
+        href: https://github.com/HI-IDN/icename-gender
 
 format:
   html:

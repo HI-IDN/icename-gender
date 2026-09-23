@@ -7,7 +7,7 @@ what that answer rests on: what each given name says in the register, what the l
 suffix says, and whether they agree.
 
 ```bash
-kyngreinir name "Helga Ingimundarson" --detail
+icename-gender name "Helga Ingimundarson" --detail
 ```
 
 ```
@@ -45,7 +45,7 @@ and the estimate is right. But a study that wants only the clearest cases can ke
 ## In a CSV
 
 ```bash
-kyngreinir csv people.csv --detail -o people_gender.csv
+icename-gender csv people.csv --detail -o people_gender.csv
 ```
 
 adds three columns to `gender` and `gender_rule`:

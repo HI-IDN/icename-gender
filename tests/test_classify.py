@@ -1,6 +1,6 @@
 import pytest
 
-from kyngreinir import Register, classify, explain
+from icename_gender import Register, classify, explain
 
 # A tiny register, so the tests do not depend on the bundled snapshot's contents.
 REGISTER = Register(

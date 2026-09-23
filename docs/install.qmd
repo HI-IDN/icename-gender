@@ -5,13 +5,13 @@ title: "Install"
 Python 3.10 or newer.
 
 ```bash
-pip install git+https://github.com/HI-IDN/kyngreinir.git
+pip install git+https://github.com/HI-IDN/icename-gender.git
 ```
 
-That gives you the `kyngreinir` command and the `kyngreinir` Python package:
+That gives you the `icename-gender` command and the `icename_gender` Python package:
 
 ```bash
-kyngreinir --help
+icename-gender --help
 ```
 
 A snapshot of the register ships with the package, so there is nothing to download before
@@ -20,8 +20,8 @@ the first classification, and no network access afterwards.
 ## From source
 
 ```bash
-git clone git@github.com:HI-IDN/kyngreinir.git
-cd kyngreinir
+git clone git@github.com:HI-IDN/icename-gender.git
+cd icename-gender
 pip install -e ".[dev]"
 pytest
 ```
@@ -32,6 +32,6 @@ In a `pyproject.toml`:
 
 ```toml
 dependencies = [
-    "kyngreinir @ git+https://github.com/HI-IDN/kyngreinir.git",
+    "icename-gender @ git+https://github.com/HI-IDN/icename-gender.git",
 ]
 ```

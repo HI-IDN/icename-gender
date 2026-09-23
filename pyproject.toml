@@ -3,7 +3,7 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "kyngreinir"
+name = "icename-gender"
 version = "0.1.0"
 description = "Estimate gender from Icelandic names: patronymics and Þjóðskrá's name register"
 readme = "README.md"
@@ -23,18 +23,18 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/HI-IDN/kyngreinir"
-Issues = "https://github.com/HI-IDN/kyngreinir/issues"
+Homepage = "https://github.com/HI-IDN/icename-gender"
+Issues = "https://github.com/HI-IDN/icename-gender/issues"
 
 [project.scripts]
-kyngreinir = "kyngreinir.cli:app"
+icename-gender = "icename_gender.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 # The register snapshot ships with the package, so classifying needs no network.
 [tool.setuptools.package-data]
-kyngreinir = ["data/*.csv"]
+icename_gender = ["data/*.csv"]
 
 [tool.ruff]
 line-length = 100
@@ -46,4 +46,4 @@ select = ["E", "F", "I", "UP", "B"]
 [tool.ruff.lint.per-file-ignores]
 # typer.Option() in an argument default is how Typer declares CLI options.
 # B008 flags it as a call in a default, which is exactly what it is meant to be.
-"src/kyngreinir/cli.py" = ["B008"]
+"src/icename_gender/cli.py" = ["B008"]

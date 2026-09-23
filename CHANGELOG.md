@@ -5,6 +5,15 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Renamed from `kyngreinir` to `icename-gender`:** the repository, the distribution and the
+  command are now `icename-gender`, and the Python package is `icename_gender`. An English
+  name, so the package can be found and used outside Iceland.
+- **Documentation site** at <https://hi-idn.github.io/icename-gender/>.
+
 ## [0.1.0] - 2026-09-23
 
 ### Added
